@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic RBG selector  - IGTI Bootcamp</title>
+    <style>
+        body {
+          background-color: rgb(240, 240, 240);
+        }
+        #colorDiv {
+        height: 300px;
+        width: 1100px;
+        margin: auto;
+        border-radius: 5%;
+        background-color: rgb(0, 0, 0);
+        }
+        input[type=range] {
+        -webkit-appearance: none;
+        margin: 18px 0;
+        width: 100%;
+        }
+        input[type=range]:focus {
+        outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #3071a9;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+        }
+        input[type=range]::-webkit-slider-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -14px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+        background: #367ebd;
+        }
+        input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #3071a9;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+        }
+        input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+        }
+        input[type=range]::-ms-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: transparent;
+        border-color: transparent;
+        border-width: 16px 0;
+        color: transparent;
+        }
+        input[type=range]::-ms-fill-lower {
+        background: #2a6495;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        }
+        input[type=range]::-ms-fill-upper {
+        background: #3071a9;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        }
+        input[type=range]::-ms-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+        }
+        input[type=range]:focus::-ms-fill-lower {
+        background: #3071a9;
+        }
+        input[type=range]:focus::-ms-fill-upper {
+        background: #367ebd;
+        }
+    </style>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+    <div class="body">
+        <div class="container">
+            <h1 class="text-center">Dynamic RBG Selector - IGTI Bootcamp</h1>
+            <table class="table table-sm table-bordered">
+              <caption class="text-center">The objective of exercise is develop only with HTML+CSS+JS a RGB color mixer.</caption>
+              <caption class="text-center">Change the range selectors and see the result below.</caption>
+              <caption class="text-center" id="rgbResult"></caption>
+                <tbody>
+                  <tr>
+                    <td>Vermelho <span style="color: red;">(R)</span>:</td>
+                    <td><input id="red" type="range" min="0" max="255" step="1" value="0" /></td>
+                    <td><output for="red" id="redOut">0</output></td>
+                  </tr>
+                  <tr>
+                    <td>Verde <span style="color: green;">(G)</span>:</td>
+                    <td><input id="green" type="range" min="0" max="255" step="1"  value="0" /></td>
+                    <td><output for="green" id="greenOut">0</output></input></td>
+                  </tr>
+                  <tr>
+                    <td>Azul <span style="color: blue;">(B):</td>
+                    <td><input id="blue" type="range" min="0" max="255" step="1" value="0" /></td>
+                    <td><output for="blue" id="blueOut">0</output></input></td>
+                  </tr>
+                </tbody>
+              </table>
+            <output id="colorDiv"></output>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+  
+    let red = document.querySelector('#red'),
+        green = document.querySelector('#green'),
+        blue = document.querySelector('#blue'),
+        redOut = document.querySelector('#redOut'),
+        greenOut = document.querySelector('#greenOut'),
+        blueOut = document.querySelector('#blueOut')
+    
+        function selectColor(){
+          newColor = `rgb(${red.value}, ${green.value}, ${blue.value})`;
+          document.querySelector('#colorDiv').style.backgroundColor = newColor;
+          document.querySelector('#rgbResult').innerText = newColor;         
+        }
+
+        red.addEventListener('change', function() {
+          selectColor();
+          redOut.value = red.value;
+        }, false);
+
+        red.addEventListener('input', function() {
+          selectColor();
+          redOut.value = red.value;
+        }, false);
+
+        green.addEventListener('change', function() {
+          selectColor();
+          greenOut.value = green.value;
+        }, false);
+
+        green.addEventListener('input', function() {
+          selectColor();
+          greenOut.value = green.value;
+        }, false);
+
+        blue.addEventListener('change', function() {
+          selectColor();
+          blueOut.value = blue.value;
+        }, false);
+
+        blue.addEventListener('input', function() {
+          selectColor();
+          blueOut.value = blue.value;
+        }, false);
+     </script>
+
+</body>
+</html>
